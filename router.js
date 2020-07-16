@@ -35,14 +35,29 @@ router.get('/article',(req,res) => {
 })
 
 router.get('/allarticle',(req,res) => {
-    let pageNo = req.query.pageNo
+    let countsql = "SELECT COUNT(*) totalpage FROM article"
+    let num = {}
+    let pages
+    db.query(countsql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        num = result
+        totalnum =num[0].totalpage
+    })
+
+    let pageNo = parseInt(req.query.pageNo)
     let pagesql = (pageNo-1)*10
     let sql = "SELECT * FROM article ORDER BY createtime DESC  limit " + pagesql + ",10"
     db.query(sql,(err,result) => {
         if(err){
             return res.status(500).send('Sever Error')
         }
-        res.send(JSON.stringify(result))
+        res.send(JSON.stringify({ 
+            result ,
+            pageNo ,
+            totalnum
+         }))
     })
 })
 
