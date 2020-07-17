@@ -62,6 +62,20 @@ router.get('/allarticle',(req,res) => {
 })
 
 
+router.get('/uploadcomment',(req,res) => {
+    let id = parseInt(req.query.id)
+    let name = req.query.name
+    let comment = req.query.comment
+    let sql = "INSERT INTO comments VALUES ('" + id + "','" + name + "','" + comment + "')"
+    db.query(sql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        res.send('success')
+    })
+})
+
+
 
 
 
