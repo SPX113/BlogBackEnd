@@ -25,12 +25,13 @@ router.get('/recommedArticle',(req,res) => {
 })
 
 router.get('/article',(req,res) => {
-    let sql = "select * from article where id = " + req.query.id 
+    let id = req.query.id
+    let sql = "select * from article where id = " + id + ";UPDATE article SET watches = watches + 1 WHERE id = " + id
     db.query(sql,(err,result) => {
         if(err){
             return res.status(500).send('Sever Error')
         }
-        res.send(JSON.stringify(result))
+        res.send(JSON.stringify(result[0][0]))
     })
 })
 
@@ -63,16 +64,27 @@ router.get('/allarticle',(req,res) => {
 
 
 router.get('/uploadcomment',(req,res) => {
-    let id = parseInt(req.query.id)
+    let id =req.query.id
     let name = req.query.name
     let comment = req.query.comment
-    let sql = "INSERT INTO comments VALUES ('" + id + "','" + name + "','" + comment + "')"
+    let sql = "INSERT INTO comments (articleid, name, comment) VALUES ('" + id + "','" + name + "','" + comment + "');UPDATE article SET comments = comments + 1 WHERE id = " + id
     db.query(sql,(err,result) => {
         if(err){
             return res.status(500).send('Sever Error')
         }
         res.send('success')
     })
+})
+
+router.get('/giveStar',(req,res) => {
+    let id = req.query.id
+    let sql = "UPDATE article SET stars = stars + 1 WHERE id = " + id
+    db.query(sql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        res.send('success')
+    }) 
 })
 
 
