@@ -87,6 +87,17 @@ router.get('/giveStar',(req,res) => {
     }) 
 })
 
+router.get('/comments',(req,res) => {
+    let id = req.query.id
+    let sql = "SELECT * FROM comments WHERE articleid = " + id + " ORDER BY createtime DESC"
+    db.query(sql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        res.send(result)
+    }) 
+})
+
 
 
 
