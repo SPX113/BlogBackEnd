@@ -122,6 +122,16 @@ router.get('/getmessage',(req,res) =>{
     }) 
 })
 
+router.get('/timeline',(req,res) => {
+    let sql = "SELECT * FROM timeline ORDER BY createtime DESC"
+    db.query(sql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        res.send(result)
+    }) 
+})
+
 
 
 
