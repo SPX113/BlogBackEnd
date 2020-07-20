@@ -98,6 +98,30 @@ router.get('/comments',(req,res) => {
     }) 
 })
 
+router.get('/uploadmessage',(req,res) => {
+    let name = req.query.name
+    let message =req.query.message
+    let sql = "INSERT INTO messagebord ( name, comment) VALUES ('" + name + "','" + message + "');"
+    db.query(sql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        res.send("success")
+    }) 
+})
+
+router.get('/getmessage',(req,res) =>{
+    let page = req.query.page
+    let sql = "SELECT * FROM messagebord ORDER BY createtime DESC  limit " + (page-1)*10 + ",10;SELECT COUNT(*) totalpage FROM messagebord"
+    db.query(sql,(err,result) => {
+        if(err){
+            return res.status(500).send('Sever Error')
+        }
+        result[1] = result[1][0]
+        res.send(result)
+    }) 
+})
+
 
 
 
