@@ -1,4 +1,4 @@
-## 前言
+# 前言
 
 想了一晚上，想不明白怎么在不影响文章自由度的情况下，储存在数据库中，并导出渲染。后来发现了这一种方法，通过解析md语法生成html.
 
@@ -8,9 +8,9 @@
 
 
 
-## 本地导入方法
+# 本地导入方法
 
-### 安装的依赖
+## 安装的依赖
 
 `npm i html-loader markdown-loader --save-dev`
 
@@ -20,7 +20,7 @@
 
 
 
-### vue.config.js 配置
+## vue.config.js 配置
 
 ```javascript
 module.exports = {
@@ -46,7 +46,7 @@ module.exports = {
 
 
 
-#### 模板使用例子
+## 模板使用例子
 
 ```javascript
 <template>
@@ -80,21 +80,21 @@ export default {
 
 
 
-## 字符串转换方法
+# 字符串转换方法
 
-### 安装插件
+## 安装插件
 
 `npm install marked -S`
 
 
 
-### 使用方法
+## 使用方法
 
 `marked(mdstr)`
 
 
 
-### 例子
+## 例子
 
 ```javascript
 <template>
@@ -129,7 +129,7 @@ export default {
 
 
 
-## github-markdown 样式下载
+# github-markdown 样式下载
 
 ` npm install github-markdown-css`
 
@@ -195,6 +195,6 @@ export default {
 
 4. 样式可以自行修改
 
-### 总结
+# 总结
 
 路漫漫其修远兮，吾将上下而求索。
